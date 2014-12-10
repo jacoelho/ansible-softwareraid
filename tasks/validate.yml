@@ -15,5 +15,6 @@
         - item.filesystem_type != ""
         - item.mount_options != ""
         - item.passno != ""
+        - item.dump != ""
     with_items: software_raid_devices
     when: software_raid_devices is defined and item.mount_point is defined

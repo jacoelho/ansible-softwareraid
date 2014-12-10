@@ -29,6 +29,11 @@
     template: src=mdadm.conf.j2 dest=/etc/mdadm/mdadm.conf
     when: software_raid_devices is defined
 
+  - name: software raid - update initramfs
+    shell: "update-initramfs -u"
+    ignore_errors: yes
+    when: software_raid_devices is defined and ansible_os_family == "Debian"
+
   - name: software raid - filesystem creation
     filesystem:
       fstype: "{{ item.filesystem_type }}"
@@ -42,6 +47,7 @@
       src: "{{ item.device }}"
       fstype: "{{ item.filesystem_type }}"
       opts: "{{ item.mount_options }}"
+      dump: "{{ item.dump }}"
       passno: "{{ item.passno }}"
       state: mounted
     with_items: software_raid_devices
