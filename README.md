@@ -4,6 +4,7 @@
 > * configures raid devices
 > * optionally mount the raid devices 
 
+
 ## Variables
 ```yaml
 software_raid_alerts_email: "email@example.com"
