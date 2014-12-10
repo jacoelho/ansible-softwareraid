@@ -1,8 +1,8 @@
 # ansible.softwareraid
-> `softwareraid` is an [ansible](http://www.ansible.com) role which: 
-> * installs mdadm
-> * configures raid devices
-> * optionally mount the raid devices 
+`softwareraid` is an [ansible](http://www.ansible.com) role which: 
+ * installs mdadm
+ * configures raid devices
+ * optionally mount the raid devices 
 
 
 ## Variables
