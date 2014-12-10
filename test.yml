@@ -2,7 +2,7 @@
 
 - hosts: all
   roles:
-    - jacoelho.raid
+    - jacoelho.softwareraid
 
   vars:
     software_raid_alerts_email: "email@example.com"
@@ -12,3 +12,7 @@
         components:
           - /dev/sdb
           - /dev/sdc
+        filesystem_type: "ext4"
+        mount_point: "/mnt/volume"
+        mount_options: "noatime,noexec,nodiratime"
+        passno: "0 0"

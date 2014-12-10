@@ -27,3 +27,21 @@
   - name: software raid - create mdadm config file
     template: src=mdadm.conf.j2 dest=/etc/mdadm/mdadm.conf
     when: software_raid_devices is defined
+
+  - name: software raid - filesystem creation
+    filesystem:
+      fstype: "{{ item.filesystem_type }}"
+      dev: "{{ item.device }}"
+    with_items: software_raid_devices
+    when: software_raid_devices is defined and item.mount_point is defined
+
+  - name: software raid - mount raid devices
+    mount:
+      name: "{{ item.mount_point }}"
+      src: "{{ item.device }}"
+      fstype: "{{ item.filesystem_type }}"
+      opts: "{{ item.mount_options }}"
+      passno: "{{ item.passno }}"
+      state: mounted
+    with_items: software_raid_devices
+    when: software_raid_devices is defined and item.mount_point is defined
