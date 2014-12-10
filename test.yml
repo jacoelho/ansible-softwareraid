@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  roles:
+    - jacoelho.raid
+
+  vars:
+    software_raid_alerts_email: "email@example.com"
+    software_raid_devices:
+      - device: /dev/md0
+        level: 0
+        components:
+          - /dev/sdb
+          - /dev/sdc
