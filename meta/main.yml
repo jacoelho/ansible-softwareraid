@@ -1,4 +1,5 @@
------
+---
+
 galaxy_info:
   author: Jose Coelho
   description: Ansible role for software raid configuration.
