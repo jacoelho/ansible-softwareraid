@@ -26,3 +26,11 @@ software_raid_devices:
     - /dev/sde
 ```
 
+## Testing
+
+Test against vagrant. Add a yml file and environment variable in the 
+make file to tell the Vagrantfile what yml config to run.
+
+```
+make test
+```

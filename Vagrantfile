@@ -30,7 +30,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # information on available options.
     config.vm.provision "ansible" do |ansible|
-      ansible.playbook = "test.yml"
+      ansible.playbook = ENV['PLAYBOOK_FILE']
       ansible.verbose = 'vv'
       ansible.sudo = true
     end
