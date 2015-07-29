@@ -1,3 +1,4 @@
 ---
 
 software_raid_alerts_email: "root"
+software_raid_force_create: false
