@@ -17,7 +17,8 @@ software_raid_devices:
   filesystem_type: "ext4"
   mount_point: "/mnt/volume"
   mount_options: "noatime,noexec,nodiratime"
-  passno: "0 0"
+  dump: 0
+  passno: 0
 - device: /dev/md1
   level: 1
   components:
