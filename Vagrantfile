@@ -15,7 +15,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     config.vm.define host[:name] do |node|
       node.vm.hostname = host[:name]
-      node.vm.box = "ubuntu1404-amd64"
+      node.vm.box = "ubuntu/trusty64"
       node.vm.provider :virtualbox do |vb|
         vb.name = host[:name]
         vb.customize ["modifyvm", :id, "--cpuexecutioncap", host[:cpu_cap]]
