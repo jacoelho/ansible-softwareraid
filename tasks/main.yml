@@ -12,23 +12,12 @@
     with_items: software_raid_devices
     when: software_raid_devices is defined
 
-  - name: software raid - create command to initialise raid devices
-    shell: echo "mdadm -v --create {{ item.0.device }} --level={{ item.0.level }} --raid-devices={{ item.0.components | length }} {{ item.0.components | join(" ") }}"
+  - name: software raid - initialise raid devices
+    shell: mdadm -v --create {{ item.0.device }} --level={{ item.0.level }} --raid-devices={{ item.0.components | length }} {{ item.0.components | join(" ") }} {{ software_raid_create_kwargs }}
     with_together:
       - software_raid_devices
       - mdadm_check.results
     when: software_raid_devices is defined and item.1.rc != 0
-    register: software_raid_mdadm_create
-
-  - name: software raid - force initialise raid devices
-    shell: yes | {{ item['stdout'] }}
-    with_items: software_raid_mdadm_create.results
-    when: software_raid_force_create and not software_raid_mdadm_create.results.0|skipped
-
-  - name: software raid - initialise raid devices
-    shell: "{{ item['stdout'] }}"
-    with_items: software_raid_mdadm_create.results
-    when: not software_raid_force_create and not software_raid_mdadm_create.results.0|skipped
 
   - name: software raid - scan raid devices
     shell: "mdadm --detail --scan"

@@ -8,6 +8,7 @@
 ## Variables
 ```yaml
 software_raid_alerts_email: "email@example.com"
+software_raid_create_kwargs: "--run" # force the creation if there are any prompts
 software_raid_devices:
 - device: /dev/md0
   level: 0
