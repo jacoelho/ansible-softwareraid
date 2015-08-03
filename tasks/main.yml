@@ -13,7 +13,7 @@
     when: software_raid_devices is defined
 
   - name: software raid - initialise raid devices
-    shell: mdadm -v --create {{ item.0.device }} --level={{ item.0.level }} --raid-devices={{ item.0.components | length }} {{ item.0.components | join(" ") }}
+    shell: mdadm -v --create {{ item.0.device }} --level={{ item.0.level }} --raid-devices={{ item.0.components | length }} {{ item.0.components | join(" ") }} {{ software_raid_create_kwargs }}
     with_together:
       - software_raid_devices
       - mdadm_check.results

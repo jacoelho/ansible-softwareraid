@@ -2,10 +2,11 @@
 
 - hosts: all
   roles:
-    - jacoelho.softwareraid
+    - .
 
   vars:
     software_raid_alerts_email: "email@example.com"
+    software_raid_create_kwargs: "--run"
     software_raid_devices:
       - device: /dev/md0
         level: 0
