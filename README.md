@@ -27,6 +27,10 @@ software_raid_devices:
     - /dev/sde
 ```
 
+## Installation
+
+```ansible-galaxy install jacoelho.softwareraid```
+
 ## Testing
 
 Test against vagrant. Add a yml file and environment variable in the 
