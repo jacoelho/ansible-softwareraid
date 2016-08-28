@@ -27,7 +27,11 @@
 
   - name: software raid - create mdadm config file
     template: src=mdadm.conf.j2 dest=/etc/mdadm/mdadm.conf
-    when: software_raid_devices is defined
+    when: software_raid_devices is defined and ansible_os_family == "Debian"
+
+  - name: software raid - create mdadm config file
+    template: src=mdadm.conf.j2 dest=/etc/mdadm.conf
+    when: software_raid_devices is defined and ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux' or ansible_distribution == 'Amazon'
 
   - name: software raid - update initramfs
     shell: "update-initramfs -u"
