@@ -9,14 +9,14 @@
     shell: "mdadm -D {{ item.device }}"
     ignore_errors: yes
     register: mdadm_check
-    with_items: software_raid_devices
+    with_items: "{{ software_raid_devices }}"
     when: software_raid_devices is defined
 
   - name: software raid - initialise raid devices
     shell: mdadm -v --create {{ item.0.device }} --level={{ item.0.level }} --raid-devices={{ item.0.components | length }} {{ item.0.components | join(" ") }} {{ software_raid_create_kwargs }}
     with_together:
-      - software_raid_devices
-      - mdadm_check.results
+      - "{{ software_raid_devices }}"
+      - "{{ mdadm_check.results }}"
     when: software_raid_devices is defined and item.1.rc != 0
 
   - name: software raid - scan raid devices
@@ -38,7 +38,7 @@
     filesystem:
       fstype: "{{ item.filesystem_type }}"
       dev: "{{ item.device }}"
-    with_items: software_raid_devices
+    with_items: "{{ software_raid_devices }}"
     when: software_raid_devices is defined and item.mount_point is defined
 
   - name: software raid - mount raid devices
@@ -50,5 +50,5 @@
       dump: "{{ item.dump }}"
       passno: "{{ item.passno }}"
       state: mounted
-    with_items: software_raid_devices
+    with_items: "{{ software_raid_devices }}"
     when: software_raid_devices is defined and item.mount_point is defined

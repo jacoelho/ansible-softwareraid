@@ -5,7 +5,7 @@
         - item.device != ""
         - item.level != ""
         - item.components | length > 1
-    with_items: software_raid_devices
+    with_items: "{{ software_raid_devices }}"
     when: software_raid_devices is defined
 
 
@@ -16,5 +16,5 @@
         - item.mount_options != ""
         - item.passno != ""
         - item.dump != ""
-    with_items: software_raid_devices
+    with_items: "{{ software_raid_devices }}"
     when: software_raid_devices is defined and item.mount_point is defined
