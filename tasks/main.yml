@@ -11,6 +11,7 @@
     register: mdadm_check
     with_items: "{{ software_raid_devices }}"
     when: software_raid_devices is defined
+    changed_when: false
 
   - name: software raid - initialise raid devices
     shell: mdadm -v --create {{ item.0.device }} --level={{ item.0.level }} --raid-devices={{ item.0.components | length }} {{ item.0.components | join(" ") }} {{ software_raid_create_kwargs }}
@@ -24,6 +25,7 @@
     ignore_errors: yes
     register: mdadm_scan
     when: software_raid_devices is defined
+    changed_when: false
 
   - name: software raid - create mdadm config file
     template: src=mdadm.conf.j2 dest=/etc/mdadm/mdadm.conf
@@ -33,6 +35,7 @@
     shell: "update-initramfs -u"
     ignore_errors: yes
     when: software_raid_devices is defined and ansible_os_family == "Debian"
+    changed_when: false
 
   - name: software raid - filesystem creation
     filesystem:
