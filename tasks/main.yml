@@ -27,6 +27,11 @@
     when: software_raid_devices is defined
     changed_when: false
 
+  - name: software raid - ensure that the mdadm config directory exists (e.g. coreos)
+    file:
+      path: /etc/mdadm
+      state: directory
+
   - name: software raid - create mdadm config file
     template: src=mdadm.conf.j2 dest=/etc/mdadm/mdadm.conf
     when: software_raid_devices is defined
